@@ -17,14 +17,17 @@
 | 6 | [Dockerfile](notes/06-dockerfile.md) | FROM, COPY, EXPOSE, build |
 | 7 | [Docker Hub](notes/07-dockerhub.md) | pull, run public images |
 | 8 | [System Cleanup](notes/08-cleanup.md) | prune, rm -f, batch delete |
-| ⚡ | [Quick Cheat Sheet](cheatsheet.md) | All essential commands |
+| 9 | [Commit, Inspect & Tag](notes/09-commit-inspect-tag.md) | commit, inspect, tag, wildcards |
+| 10 | [Login, Push & Local Registry](notes/10-login-push-local-registry.md) | Docker Hub push, private registry |
+| 11 | [Internals & System Management](notes/11-internals-system-management.md) | /var/lib/docker, OverlayFS, systemd daemon |
+| ⚡ | [Quick Cheat Sheet](cheatsheet.md) | All essential commands at a glance |
 
 ---
 
 ## 🚀 How to Use
 
 1. ⭐ **Star** this repo so you can find it later
-2. Read notes in order (01 → 08) for a structured learning path
+2. Read notes **in order (01 → 11)** for a structured learning path
 3. Keep the **[Cheat Sheet](cheatsheet.md)** open as a quick reference while practising
 4. Every command was tested on **AlmaLinux 9 / RHEL 9**
 
@@ -42,8 +45,8 @@
 
 ```
 docker-learning-notes/
-├── README.md            ← you are here
-├── cheatsheet.md        ← quick command reference
+├── README.md
+├── cheatsheet.md
 ├── notes/
 │   ├── 01-installation-setup.md
 │   ├── 02-images.md
@@ -52,8 +55,11 @@ docker-learning-notes/
 │   ├── 05-networking.md
 │   ├── 06-dockerfile.md
 │   ├── 07-dockerhub.md
-│   └── 08-cleanup.md
-└── images/              ← diagrams and screenshots
+│   ├── 08-cleanup.md
+│   ├── 09-commit-inspect-tag.md
+│   ├── 10-login-push-local-registry.md
+│   └── 11-internals-system-management.md
+└── images/
 ```
 
 ---
