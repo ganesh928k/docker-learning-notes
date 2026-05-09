@@ -5,7 +5,7 @@
 ## 🖼️ Images
 
 ```bash
-docker pull nginx:latest          # Download image
+docker pull nginx:latest          # Download image latest
 docker images                     # List local images
 docker images nginx               # Filter by name
 docker images "nginx*"            # Wildcard filter (quote it!)
