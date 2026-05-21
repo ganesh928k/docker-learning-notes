@@ -78,4 +78,4 @@ Found a mistake or want to add a topic?
 
 ---
 
-*Built with ❤️ while learning DevOps the hands-on way.*
+More comming soon
