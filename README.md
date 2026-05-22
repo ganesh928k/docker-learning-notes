@@ -8,18 +8,22 @@
 ## 📚 Table of Contents
 
 | # | File | Topics Covered |
-|---|------|---------------|
+|---|------|----------------|
 | 1 | [Installation & Setup](notes/01-installation-setup.md) | DNF repo, Docker CE, systemctl |
-| 2 | [Docker Images](notes/02-images.md) | pull, push, search, history, rmi |
+| 2 | [Docker Images](notes/02-images.md) | pull, search, history, rmi |
 | 3 | [Docker Containers](notes/03-containers.md) | run, ps, stop, rm, exec, attach |
-| 4 | [Container Lifecycle](notes/04-lifecycle.md) | start, pause, unpause, rename, stats |
+| 4 | [Container Lifecycle](notes/04-lifecycle.md) | start, pause, rename, stats, logs |
 | 5 | [Port Mapping & Networking](notes/05-networking.md) | -p flag, bridge network, ip a |
 | 6 | [Dockerfile](notes/06-dockerfile.md) | FROM, COPY, EXPOSE, build |
 | 7 | [Docker Hub](notes/07-dockerhub.md) | pull, run public images |
 | 8 | [System Cleanup](notes/08-cleanup.md) | prune, rm -f, batch delete |
 | 9 | [Commit, Inspect & Tag](notes/09-commit-inspect-tag.md) | commit, inspect, tag, wildcards |
 | 10 | [Login, Push & Local Registry](notes/10-login-push-local-registry.md) | Docker Hub push, private registry |
-| 11 | [Internals & System Management](notes/11-internals-system-management.md) | /var/lib/docker, OverlayFS, systemd daemon |
+| 11 | [Internals & System Management](notes/11-internals-system-management.md) | /var/lib/docker, OverlayFS, systemd |
+| 12 | [Resource Constraints & cgroups](notes/12-resource-constraints-cgroups.md) | CPU, memory, I/O, PID limits, docker update |
+| 13 | [Networking Deep Dive](notes/13-networking-deep-dive.md) | bridge, host, internal, custom networks |
+| 14 | [Volumes](notes/14-volumes.md) | named, anonymous, bind, backup, restore |
+| 15 | [Linux Namespaces](notes/15-namespaces-pid-uts-ipc-user.md) | PID, UTS, IPC, user namespace remapping |
 | ⚡ | [Quick Cheat Sheet](cheatsheet.md) | All essential commands at a glance |
 
 ---
@@ -27,9 +31,19 @@
 ## 🚀 How to Use
 
 1. ⭐ **Star** this repo so you can find it later
-2. Read notes **in order (01 → 11)** for a structured learning path
-3. Keep the **[Cheat Sheet](cheatsheet.md)** open as a quick reference while practising
+2. Read notes **in order (01 → 15)** for a structured learning path
+3. Keep the **[Cheat Sheet](cheatsheet.md)** open while practising
 4. Every command was tested on **AlmaLinux 9 / RHEL 9**
+
+---
+
+## 🗺️ Learning Path
+
+```
+Basics (01-08)          → Core Docker CLI, images, containers, cleanup
+Intermediate (09-11)    → commit, tag, push, local registry, internals
+Advanced (12-15)        → cgroups, networking, volumes, Linux namespaces
+```
 
 ---
 
@@ -58,7 +72,11 @@ docker-learning-notes/
 │   ├── 08-cleanup.md
 │   ├── 09-commit-inspect-tag.md
 │   ├── 10-login-push-local-registry.md
-│   └── 11-internals-system-management.md
+│   ├── 11-internals-system-management.md
+│   ├── 12-resource-constraints-cgroups.md
+│   ├── 13-networking-deep-dive.md
+│   ├── 14-volumes.md
+│   └── 15-namespaces-pid-uts-ipc-user.md
 └── images/
 ```
 
@@ -78,4 +96,4 @@ Found a mistake or want to add a topic?
 
 ---
 
-More comming soon
+*Built with ❤️ while learning DevOps the hands-on way.*

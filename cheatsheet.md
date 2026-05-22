@@ -5,10 +5,10 @@
 ## 🖼️ Images
 
 ```bash
-docker pull nginx:latest          # Download image latest
+docker pull nginx:latest          # Download image
 docker images                     # List local images
 docker images nginx               # Filter by name
-docker images "nginx*"            # Wildcard filter (quote it!)
+docker images "nginx*"            # Wildcard (always quote)
 docker search nginx               # Search Docker Hub
 docker image history nginx        # Show image layers
 docker rmi nginx                  # Remove image
@@ -21,7 +21,7 @@ docker rmi $(docker images -q)    # Remove ALL images (careful!)
 
 ```bash
 docker run nginx                              # Run foreground
-docker run -d nginx                           # Run in background
+docker run -d nginx                           # Detached/background
 docker run -it ubuntu bash                    # Interactive shell
 docker run -dit --name web nginx              # Background + attachable
 docker run -d --name web -p 8080:80 nginx     # With port mapping
@@ -33,14 +33,16 @@ docker run -d --rm nginx                      # Auto-delete on stop
 ## 📋 Inspect & Monitor
 
 ```bash
-docker ps / docker ps -a                           # Running / all containers
-docker inspect web                                 # Full JSON details
-docker inspect web | grep IPAddress                # Container IP
-docker image inspect nginx:latest | grep -i lower  # OverlayFS layers
-docker logs web / --follow / --tail 50             # Logs
-docker stats / docker stats web                    # Live resource usage
-docker info                                        # Daemon config & stats
-docker system df / docker system df -v             # Disk usage
+docker ps / docker ps -a
+docker inspect web
+docker inspect --format '{{.Id}}' web               # Extract single field
+docker inspect --format '{{.State.Pid}}' web        # Get container host PID
+docker inspect web | grep IPAddress
+docker image inspect nginx:latest | grep -i lower   # OverlayFS layers
+docker logs web / --follow / --tail 50
+docker stats / docker stats web
+docker info
+docker system df / docker system df -v
 ```
 
 ---
@@ -48,37 +50,127 @@ docker system df / docker system df -v             # Disk usage
 ## 💾 Commit & Tag
 
 ```bash
-docker commit <id> myimage:v1                              # Save container state
-docker commit --author="ganesh" --message="msg" <id> name  # With metadata
-docker tag myimage:v1 myimage:stable                       # Add alias tag
-docker tag myimage:v1 jaatxog/myimage:latest               # Tag for Hub push
-docker rmi myimage:stable                                  # Remove a tag only
+docker commit <id> myimage:v1
+docker commit --author="ganesh" --message="msg" <id> name
+docker tag myimage:v1 myimage:stable
+docker tag myimage:v1 jaatxog/myimage:latest
+docker rmi myimage:stable                            # Remove tag only
 ```
 
 ---
 
-## 🌐 Registry — Docker Hub
+## 🌐 Registry
 
 ```bash
-docker login -u <username>                    # Log in
-docker logout                                 # Log out
-docker tag myimage:v1 user/myimage:v1         # Tag for push
-docker push user/myimage:v1                   # Push to Hub
-docker pull user/myimage:v1                   # Pull from Hub
-docker search jaatxog                         # Search repos
-```
-
----
-
-## 🏠 Local Registry
-
-```bash
-docker pull registry:2
+docker login -u <username>
+docker logout
+docker tag myimage:v1 user/myimage:v1
+docker push user/myimage:v1
+docker pull user/myimage:v1
+# Local registry
 docker run -d -p 5000:5000 --name local-registry registry:2
 docker tag alpine:latest localhost:5000/alpine:latest
 docker push localhost:5000/alpine:latest
-docker pull localhost:5000/alpine:latest
-curl http://localhost:5000/v2/_catalog        # List stored images
+curl http://localhost:5000/v2/_catalog
+```
+
+---
+
+## ⚡ Resource Constraints (cgroups)
+
+```bash
+# Set at run time
+docker run -d --name con1 \
+  --cpus "1.5" --memory="500m" --memory-swap="1g" busybox sleep 1000
+
+# I/O write rate limit
+docker run -d --name io_test \
+  --device-write-bps /dev/mapper/almalinux-root:1mb busybox sleep 10000
+
+# PID limit
+docker run -it --name pid_test --pids-limit 6 alpine sh
+
+# Update live (no restart needed)
+docker update --cpus 2 --memory 250m con1
+
+# Verify
+docker inspect con1 | grep -i memory
+docker inspect con1 | grep -i cpu
+docker inspect io_test | grep -i rate
+
+# Read from cgroups directly
+cat /proc/$(docker inspect --format '{{.State.Pid}}' con1)/cgroup
+# Navigate: /sys/fs/cgroup/system.slice/docker-<ID>.scope/
+cat cpu.max && cat memory.max && cat io.max && cat pids.max
+```
+
+---
+
+## 🌍 Networking
+
+```bash
+docker network ls
+docker network create my_bridge                            # Custom bridge (has DNS)
+docker network create iso_net --driver bridge --internal   # Isolated (no internet)
+docker network inspect my_bridge
+docker network rm iso_net my_bridge
+
+docker run -dit --name con3 --network my_bridge alpine sh  # Custom bridge
+docker run -dit --name con6 --network host alpine sh       # Host network
+```
+
+---
+
+## 💿 Volumes
+
+```bash
+docker volume create my_vol
+docker volume ls
+docker volume inspect my_vol                               # See host path
+docker volume rm my_vol                                    # Stop containers first
+docker volume prune                                        # Remove all unused
+
+docker run -d --name con1 -v my_vol:/data nginx            # Named volume
+docker run -d --name con2 -v my_vol:/shared_data alpine sleep 1000  # Shared
+docker run -d --name con3 -v /data nginx                   # Anonymous volume
+docker run -d --name con4 -v $(pwd):/app nginx             # Bind mount
+
+# Backup
+docker run --rm -v my_vol:/data -v $(pwd):/backup ubuntu \
+  tar cvf /backup/backup.tar /data
+
+# Restore
+docker run --rm -v my_vol:/data -v $(pwd):/backup ubuntu \
+  tar xvf /backup/backup.tar -C /
+```
+
+---
+
+## 🔒 Namespaces
+
+```bash
+# UTS — hostname
+docker run -it --hostname myhost ubuntu bash           # Custom hostname
+docker run -it --uts=host ubuntu bash                  # Share host hostname
+hostnamectl set-hostname newname                       # Change host hostname
+docker exec con1 hostname                              # Check container hostname
+
+# PID
+docker run -d --pid=host ubuntu sleep infinity         # Share host PID ns
+docker exec con1 ps aux                                # What container sees
+
+# IPC — shared memory
+ipcmk -M 1024                                          # Create shared mem (host)
+ipcs -m                                                # List shared memory
+ipcrm -m <shmid>                                       # Remove shared mem
+docker run -it --name s1 --ipc=shareable ubuntu bash
+docker run -it --name s2 --ipc=container:s1 ubuntu bash
+docker run -it --ipc=host ubuntu bash
+
+# User namespace remapping
+cat /etc/subuid && cat /etc/subgid
+docker info | grep -i userns
+# /etc/docker/daemon.json: { "userns-remap": "default" }
 ```
 
 ---
@@ -97,9 +189,9 @@ docker rename web mysite
 
 ```bash
 docker exec -it web bash         # ← USE THIS to shell in
-docker attach web                # Attach (Ctrl+P Ctrl+Q to exit safely)
-docker cp web:/path ./local      # Copy file out
-docker cp ./file web:/path       # Copy file in
+docker attach web                # Ctrl+P Ctrl+Q to detach safely
+docker cp web:/path ./local
+docker cp ./file web:/path
 ```
 
 ---
@@ -107,9 +199,9 @@ docker cp ./file web:/path       # Copy file in
 ## 🏗️ Build
 
 ```bash
-docker build -t myapp .          # Build from ./Dockerfile
-docker build -t myapp:v2 .       # With version tag
-docker inspect myapp:latest      # Inspect built image
+docker build -t myapp .
+docker build -t myapp:v2 .
+docker inspect myapp:latest
 ```
 
 ---
@@ -121,6 +213,12 @@ systemctl status docker
 systemctl daemon-reload && systemctl restart docker
 vim /lib/systemd/system/docker.service
 firewall-cmd --permanent --add-port=2375/tcp && firewall-cmd --reload
+
+# Emergency clean restart
+ps -ef | grep -E 'dockerd|containerd'
+kill -9 <PID>
+rm -f /var/run/docker.pid /var/run/docker.sock
+systemctl restart containerd && systemctl restart docker
 ```
 
 ---
@@ -129,9 +227,7 @@ firewall-cmd --permanent --add-port=2375/tcp && firewall-cmd --reload
 
 ```bash
 sudo ls -lh /var/lib/docker/
-sudo ls -lh /var/lib/docker/containers/
-sudo ls -lh /var/lib/docker/image/
-sudo ls -lh /var/lib/docker/volumes/
+sudo ls -lh /var/lib/docker/{containers,image,volumes,network}
 yum install tree -y && tree -af /var/lib/docker/image/
 updatedb && locate overlay2
 ```
@@ -141,11 +237,12 @@ updatedb && locate overlay2
 ## 🗑️ Cleanup
 
 ```bash
-docker container prune             # Stopped containers
-docker image prune                 # Dangling images
-docker system prune                # Everything unused
-docker system prune -a             # + unused images
-docker rm $(docker ps -a -q)       # All stopped containers
+docker container prune
+docker image prune
+docker volume prune
+docker system prune
+docker system prune -a
+docker rm -f $(docker ps -a -q)
 ```
 
 ---
@@ -161,6 +258,9 @@ docker rm $(docker ps -a -q)       # All stopped containers
 | `dockerfile` | `Dockerfile` (capital D) |
 | `docker start <id> -dit` | `docker start -dit <id>` |
 | `docker images *nginx` | `docker images "nginx*"` |
-| `docker pull ngnix` | `docker pull nginx` |
+| `docker pull ngnix` | `docker pull nginx` (typo) |
+| `--pid-limit 6` | `--pids-limit 6` (add the **s**) |
+| `--ipc=container:ipc-shared1` | `--ipc=container:ipc_shared1` (exact name) |
+| `docker df -v` | `docker system df -v` |
+| `${docker ps -a -q}` | `$(docker ps -a -q)` (use `$()` not `${}`) |
 | `update db` | `updatedb` (one word) |
-| `docker images -ls` | `docker image ls` |
