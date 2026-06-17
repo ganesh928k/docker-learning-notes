@@ -24,6 +24,9 @@
 | 13 | [Networking Deep Dive](notes/13-networking-deep-dive.md) | bridge, host, internal, custom networks |
 | 14 | [Volumes](notes/14-volumes.md) | named, anonymous, bind, backup, restore |
 | 15 | [Linux Namespaces](notes/15-namespaces-pid-uts-ipc-user.md) | PID, UTS, IPC, user namespace remapping |
+| 16 | [Advanced Dockerfile Instructions](notes/16-dockerfile-advanced-instructions.md) | WORKDIR, ENV, LABEL, ADD, ENTRYPOINT |
+| 17 | [Practical App Deployments](notes/17-practical-app-deployments.md) | Dockerfiles for Node.js, Python, Nginx, Jenkins |
+| 18 | [Multi-Stage Builds](notes/18-multistage-builds.md) | Stage separation, tiny images, Go example |
 | ⚡ | [Quick Cheat Sheet](cheatsheet.md) | All essential commands at a glance |
 
 ---
@@ -42,7 +45,7 @@
 ```
 Basics (01-08)          → Core Docker CLI, images, containers, cleanup
 Intermediate (09-11)    → commit, tag, push, local registry, internals
-Advanced (12-15)        → cgroups, networking, volumes, Linux namespaces
+Advanced (12-18)        → cgroups, networking, namespaces, advanced Dockerfile techniques
 ```
 
 ---
@@ -76,7 +79,10 @@ docker-learning-notes/
 │   ├── 12-resource-constraints-cgroups.md
 │   ├── 13-networking-deep-dive.md
 │   ├── 14-volumes.md
-│   └── 15-namespaces-pid-uts-ipc-user.md
+│   ├── 15-namespaces-pid-uts-ipc-user.md
+│   ├── 16-dockerfile-advanced-instructions.md
+│   ├── 17-practical-app-deployments.md
+│   └── 18-multistage-builds.md
 └── images/
 ```
 

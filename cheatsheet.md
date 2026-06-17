@@ -206,6 +206,19 @@ docker inspect myapp:latest
 
 ---
 
+## 📝 Advanced Dockerfile Instructions
+
+| Instruction | Usage |
+|---|---|
+| `WORKDIR` | Sets working directory (e.g., `WORKDIR /app`) |
+| `ENV` | Sets environment variables (`ENV VAR=value`) |
+| `LABEL` | Adds metadata (`LABEL version="1.0"`) |
+| `ADD` | Like `COPY`, but extracts tars & downloads URLs |
+| `ENTRYPOINT` | Core executable (appends `docker run` args) |
+| `CMD` | Default arguments (overridden by `docker run` args) |
+
+---
+
 ## ⚙️ Daemon (systemd)
 
 ```bash
