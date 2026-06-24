@@ -12,3 +12,6 @@ Thumbs.db
 # Temp files
 *.tmp
 *.bak
+
+# Scripts
+update-docker-notes*.sh

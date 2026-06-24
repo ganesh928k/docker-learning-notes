@@ -27,6 +27,7 @@
 | 16 | [Advanced Dockerfile Instructions](notes/16-dockerfile-advanced-instructions.md) | WORKDIR, ENV, LABEL, ADD, ENTRYPOINT |
 | 17 | [Practical App Deployments](notes/17-practical-app-deployments.md) | Dockerfiles for Node.js, Python, Nginx, Jenkins |
 | 18 | [Multi-Stage Builds](notes/18-multistage-builds.md) | Stage separation, tiny images, Go example |
+| 19 | [Docker Compose](notes/19-docker-compose.md) | docker-compose.yml, up, down, scaling, WordPress app |
 | ⚡ | [Quick Cheat Sheet](cheatsheet.md) | All essential commands at a glance |
 
 ---
@@ -34,7 +35,7 @@
 ## 🚀 How to Use
 
 1. ⭐ **Star** this repo so you can find it later
-2. Read notes **in order (01 → 15)** for a structured learning path
+2. Read notes **in order (01 → 19)** for a structured learning path
 3. Keep the **[Cheat Sheet](cheatsheet.md)** open while practising
 4. Every command was tested on **AlmaLinux 9 / RHEL 9**
 
@@ -45,7 +46,7 @@
 ```
 Basics (01-08)          → Core Docker CLI, images, containers, cleanup
 Intermediate (09-11)    → commit, tag, push, local registry, internals
-Advanced (12-18)        → cgroups, networking, namespaces, advanced Dockerfile techniques
+Advanced (12-19)        → cgroups, networking, namespaces, advanced Dockerfiles, Docker Compose
 ```
 
 ---
@@ -82,7 +83,13 @@ docker-learning-notes/
 │   ├── 15-namespaces-pid-uts-ipc-user.md
 │   ├── 16-dockerfile-advanced-instructions.md
 │   ├── 17-practical-app-deployments.md
-│   └── 18-multistage-builds.md
+│   ├── 18-multistage-builds.md
+│   └── 19-docker-compose.md
+├── examples/
+│   ├── docker-compose-nginx/
+│   ├── docker-compose-python/
+│   ├── docker-compose-wordpress/
+│   └── dockerfile-projects/
 └── images/
 ```
 

@@ -247,6 +247,21 @@ updatedb && locate overlay2
 
 ---
 
+## 🐙 Docker Compose
+
+```bash
+docker compose up -d                  # Build, create, start in background
+docker compose down                   # Stop and remove containers, networks
+docker compose down -v                # Also remove named volumes
+docker compose ps / ls                # List services / projects
+docker compose logs -f                # Follow logs for all services
+docker compose exec db bash           # Shell into a specific service
+docker compose config                 # Validate compose file
+docker compose up -d --scale web=3    # Scale a service to 3 instances
+```
+
+---
+
 ## 🗑️ Cleanup
 
 ```bash
@@ -277,3 +292,6 @@ docker rm -f $(docker ps -a -q)
 | `docker df -v` | `docker system df -v` |
 | `${docker ps -a -q}` | `$(docker ps -a -q)` (use `$()` not `${}`) |
 | `update db` | `updatedb` (one word) |
+| `docker compose build` | `docker compose up --build` (build and start) |
+| `docker imageges` | `docker images` (typo) |
+| `docker-compose up` | `docker compose up` (v2 plugin syntax) |
