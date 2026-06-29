@@ -138,3 +138,8 @@ docker inspect apache-rhel9-ganesh928:latest             # verify
 | `docker pull <image>` | Download from registry |
 | `docker run -d -p 5000:5000 registry:2` | Start local private registry |
 | `curl localhost:5000/v2/_catalog` | List images in local registry |
+
+
+---
+
+*Navigation:*<br>[&larr; Previous Note](09-commit-inspect-tag.md) | [Next Note &rarr;](11-internals-system-management.md)

@@ -90,7 +90,7 @@ docker images nginx               # exact match
 docker images "nginx*"            # wildcard — always quote it
 ```
 
-> ⚠️ `docker images *nginx` without quotes: shell expands `*` before Docker sees it. Always quote wildcards.
+> [!WARNING] `docker images *nginx` without quotes: shell expands `*` before Docker sees it. Always quote wildcards.
 
 ---
 
@@ -102,3 +102,8 @@ docker images "nginx*"            # wildcard — always quote it
 | `docker inspect <name/id>` | Full JSON details of image or container |
 | `docker tag <src> <dest>` | Add a new name/tag to an existing image |
 | `docker images "nginx*"` | Filter image list by name |
+
+
+---
+
+*Navigation:*<br>[&larr; Previous Note](08-cleanup.md) | [Next Note &rarr;](10-login-push-local-registry.md)

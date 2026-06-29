@@ -101,7 +101,7 @@ docker volume rm my_vol
 docker volume prune
 ```
 
-> ⚠️ `docker volume rm` fails if any container (even stopped) references the volume.
+> [!WARNING] `docker volume rm` fails if any container (even stopped) references the volume.
 
 ---
 
@@ -150,3 +150,8 @@ The `my_vol` volume is created automatically if it doesn't exist.
 | `-v $(pwd):/backup` | Bind mount current directory |
 | `tar cvf /backup/backup.tar /data` | Backup volume contents |
 | `tar xvf /backup/backup.tar -C /` | Restore volume contents |
+
+
+---
+
+*Navigation:*<br>[&larr; Previous Note](13-networking-deep-dive.md) | [Next Note &rarr;](15-namespaces-pid-uts-ipc-user.md)

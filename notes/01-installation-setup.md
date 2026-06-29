@@ -20,7 +20,7 @@ sudo dnf config-manager --add-repo https://download.docker.com/linux/rhel/docker
 dnf repolist   # verify repo was added
 ```
 
-> **Tip:** Always use the RHEL repo URL on AlmaLinux 9, not the Fedora URL.
+> [!TIP] Always use the RHEL repo URL on AlmaLinux 9, not the Fedora URL.
 
 ---
 
@@ -68,3 +68,8 @@ sudo usermod -aG docker $USER
 newgrp docker          # apply without logging out
 docker run hello-world # should work without sudo now
 ```
+
+
+---
+
+*Navigation:*<br>[Next Note &rarr;](02-images.md)

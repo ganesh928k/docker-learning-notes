@@ -67,7 +67,7 @@ docker run -d --name io_test \
 docker inspect io_test | grep -i "rate"
 ```
 
-> ⚠️ `/dev/sda2` won't work on LVM setups. Always use the `lsblk` output to find the correct device path.
+> [!WARNING] `/dev/sda2` won't work on LVM setups. Always use the `lsblk` output to find the correct device path.
 
 ---
 
@@ -77,7 +77,7 @@ docker inspect io_test | grep -i "rate"
 docker run -it --name pid_test --pids-limit 6 alpine sh
 ```
 
-> ⚠️ The flag is `--pids-limit` (with an **s**), NOT `--pid-limit`.
+> [!WARNING] The flag is `--pids-limit` (with an **s**), NOT `--pid-limit`.
 
 ---
 
@@ -176,3 +176,8 @@ ps aux | grep sleep
 | `docker inspect --format '{{.State.Pid}}' con1` | Extract specific field |
 | `cat /sys/fs/cgroup/.../cpu.max` | Read enforced cgroup limit |
 | `--pid=host` | Share host PID namespace |
+
+
+---
+
+*Navigation:*<br>[&larr; Previous Note](11-internals-system-management.md) | [Next Note &rarr;](13-networking-deep-dive.md)

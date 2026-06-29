@@ -51,7 +51,7 @@ docker system prune -a     # also removes images not used by any container
 docker system prune -f     # skip confirmation prompt
 ```
 
-> ⚠️ **WARNING:** Never run `docker system prune -a -f` on a production server.
+> [!WARNING] **WARNING:** Never run `docker system prune -a -f` on a production server.
 > It will remove images that containers might need on next start.
 
 ---
@@ -80,3 +80,8 @@ docker rmi myoldimage
 docker container prune
 docker image prune
 ```
+
+
+---
+
+*Navigation:*<br>[&larr; Previous Note](07-dockerhub.md) | [Next Note &rarr;](09-commit-inspect-tag.md)

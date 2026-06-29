@@ -37,7 +37,7 @@ ip a
 You'll see a `docker0` interface — the virtual bridge Docker uses.
 All containers on the default network connect through this bridge.
 
-> ⚠️ `ifconfig` is deprecated on AlmaLinux 9. Use `ip a` instead.
+> [!WARNING] `ifconfig` is deprecated on AlmaLinux 9. Use `ip a` instead.
 > `ipconfig` is a **Windows** command and won't work on Linux.
 
 ---
@@ -59,3 +59,8 @@ docker inspect con1 | grep IPAddress  # container's internal IP
 | `bridge` | Default. Containers can talk to each other by IP |
 | `host` | Container shares host's network stack |
 | `none` | No networking |
+
+
+---
+
+*Navigation:*<br>[&larr; Previous Note](04-lifecycle.md) | [Next Note &rarr;](06-dockerfile.md)

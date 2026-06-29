@@ -122,7 +122,7 @@ docker run -it --name ipc-shared2 --ipc=container:ipc_shared1 ubuntu:latest bash
 # inside: ipcs -m  ← sees the shared memory from ipc_shared1 ✅
 ```
 
-> ⚠️ Use the exact container name — `ipc_shared1` (underscore), not `ipc-shared1` (hyphen).
+> [!WARNING] Use the exact container name — `ipc_shared1` (underscore), not `ipc-shared1` (hyphen).
 
 ### Share host IPC namespace
 
@@ -201,7 +201,7 @@ systemctl restart docker
 docker info    # confirm clean state
 ```
 
-> ⚠️ `rm -rf /var/lib/docker` destroys ALL containers, images, and volumes.
+> [!WARNING] `rm -rf /var/lib/docker` destroys ALL containers, images, and volumes.
 > Only use on lab machines. NEVER on production.
 
 ---
@@ -229,3 +229,8 @@ With namespaces:    each container thinks it IS the only thing running on the ma
 | Enable user namespace remapping | daemon.json → `"userns-remap": "default"` |
 | Check UID mappings | `cat /etc/subuid` / `cat /etc/subgid` |
 | Verify userns active | `docker info \| grep -i userns` |
+
+
+---
+
+*Navigation:*<br>[&larr; Previous Note](14-volumes.md) | [Next Note &rarr;](16-dockerfile-advanced-instructions.md)

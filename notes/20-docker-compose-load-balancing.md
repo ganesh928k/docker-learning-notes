@@ -8,6 +8,17 @@ A typical setup involves:
 1. **Application Containers**: Multiple instances of the same service (e.g., a Python/Flask or Node.js app).
 2. **Nginx Load Balancer**: A single Nginx container that receives incoming HTTP traffic and routes it to the application containers (often using round-robin).
 
+```mermaid
+graph TD
+    Client([Client]) -->|Port 8080| Nginx[Nginx Load Balancer]
+    
+    subgraph Docker Compose Network
+        Nginx -->|Round Robin| App1[App Instance 1]
+        Nginx -->|Round Robin| App2[App Instance 2]
+        Nginx -->|Round Robin| App3[App Instance 3]
+    end
+```
+
 ## 🚀 Scaling with Docker Compose
 
 You don't need to write multiple service definitions in your `docker-compose.yml` to run multiple instances. Use the `--scale` flag instead.
@@ -62,3 +73,8 @@ docker compose ps
 # Check the logs of the load balancer to see round-robin in action
 docker compose logs -f nginx-lb
 ```
+
+
+---
+
+*Navigation:*<br>[&larr; Previous Note](19-docker-compose.md) | [Next Note &rarr;](21-linux-essentials-for-docker.md)

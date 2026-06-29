@@ -5,6 +5,41 @@ Every container connects to a network — if you don't specify one, Docker uses 
 
 ---
 
+## 🗺️ Network Architecture Overview
+
+```mermaid
+graph TD
+    subgraph Host OS
+        ETH0[Host Network Interface]
+    end
+
+    subgraph Default Bridge
+        C1[Container 1]
+        C2[Container 2]
+    end
+
+    subgraph Custom Bridge
+        C3[Container 3]
+        C4[Container 4]
+    end
+
+    subgraph Isolated Internal
+        C5[Container 5]
+    end
+
+    C1 --- Bridge0[docker0]
+    C2 --- Bridge0
+    C3 --- Custom[my_bridge]
+    C4 --- Custom
+    C5 --- Internal[iso_net]
+    
+    Bridge0 --> ETH0
+    Custom --> ETH0
+    %% Internal is completely isolated
+```
+
+---
+
 ## List networks
 
 ```bash
@@ -103,7 +138,7 @@ docker inspect con6            # NetworkSettings.Networks → "host"
 
 **When to use:** Maximum performance, monitoring agents, containers binding directly to host ports.
 
-> ⚠️ `--network host` only works natively on Linux. Behaves differently on Mac/Windows (Docker runs in a VM there).
+> [!WARNING] `--network host` only works natively on Linux. Behaves differently on Mac/Windows (Docker runs in a VM there).
 
 ---
 
@@ -140,3 +175,8 @@ docker network ls
 | `host` | ✅ | N/A | Performance, monitoring |
 | `--internal` | ❌ | ✅ | Isolated backends, DBs |
 | `none` | ❌ | ❌ | Maximum isolation |
+
+
+---
+
+*Navigation:*<br>[&larr; Previous Note](12-resource-constraints-cgroups.md) | [Next Note &rarr;](14-volumes.md)

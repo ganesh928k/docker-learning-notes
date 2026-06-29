@@ -1,7 +1,14 @@
 # 🐳 Docker Learning Notes
 
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+[![Docker](https://img.shields.io/badge/Docker-Tested-2496ED?logo=docker&logoColor=white)](#)
+[![Linux](https://img.shields.io/badge/Linux-RHEL%209%20%2F%20AlmaLinux-FCC624?logo=linux&logoColor=black)](#)
+
 > Practical, hands-on Docker notes built from real terminal sessions.
 > Beginner-to-intermediate friendly. No fluff — just working commands and clear explanations.
+
+## 🎯 Why this repo?
+Most tutorials are either too high-level or overly theoretical. These notes were built from the ground up, inside a real terminal, fixing real errors. It serves as both a reference and a step-by-step interactive course.
 
 ---
 

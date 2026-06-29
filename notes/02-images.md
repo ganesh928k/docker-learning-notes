@@ -29,7 +29,7 @@ httpd        latest    331548c5249b   2 weeks ago    148MB
 almalinux    latest    8f50403cd881   3 weeks ago    196MB
 ```
 
-> **Tip:** Use the Image ID (e.g. `8f50403cd881`) when running an image that has no tag.
+> [!TIP] Use the Image ID (e.g. `8f50403cd881`) when running an image that has no tag.
 
 ---
 
@@ -62,3 +62,8 @@ docker rmi 331548c5249b      # by ID
 ```
 
 > You cannot remove an image while a container (even stopped) is using it. Remove the container first.
+
+
+---
+
+*Navigation:*<br>[&larr; Previous Note](01-installation-setup.md) | [Next Note &rarr;](03-containers.md)

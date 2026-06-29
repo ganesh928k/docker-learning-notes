@@ -68,7 +68,7 @@ docker attach con1
 
 Connects to the container's **primary** process.
 
-> ⚠️ Pressing `Ctrl+C` here **stops the container**!
+> [!WARNING] Pressing `Ctrl+C` here **stops the container**!
 > Safe exit: `Ctrl+P` then `Ctrl+Q`
 
 ### exec vs attach
@@ -78,3 +78,8 @@ Connects to the container's **primary** process.
 | What it does | New shell process | Connects to PID 1 |
 | Exit risk | Safe | Ctrl+C stops container |
 | Preferred | ✅ Yes | Only for specific debugging |
+
+
+---
+
+*Navigation:*<br>[&larr; Previous Note](02-images.md) | [Next Note &rarr;](04-lifecycle.md)

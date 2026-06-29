@@ -29,6 +29,23 @@ Docker Compose allows you to define all services, networks, and volumes in a `do
 
 This is based on the practical example in `examples/docker-compose-wordpress`:
 
+```mermaid
+graph LR
+    User([User Browser]) -->|Port 8080| WP[WordPress Container]
+    WP -->|Internal Port 3306| DB[(MySQL Container)]
+    
+    subgraph Docker Compose Project
+        WP
+        DB
+    end
+    
+    subgraph Persistent Storage
+        V1[(db_data volume)]
+    end
+    
+    DB --- V1
+```
+
 ```yaml
 version: '3.8'
 
@@ -118,3 +135,8 @@ docker compose up -d --scale wordpress=1
 1. **Automatic Networking**: By default, `docker compose up` creates a custom bridge network for the project. Services can communicate with each other using their service names as hostnames (e.g., `WORDPRESS_DB_HOST: db`).
 2. **Project Names**: Docker Compose uses the directory name as the project name. If your folder is named `myapp`, the network will be `myapp_default` and the containers will be named `myapp-db-1`, `myapp-wordpress-1`.
 3. **Rebuilding Images**: If you change your code or your `Dockerfile`, running `docker compose up` will **not** rebuild the image automatically. You must run `docker compose build` or `docker compose up --build`.
+
+
+---
+
+*Navigation:*<br>[&larr; Previous Note](18-multistage-builds.md) | [Next Note &rarr;](20-docker-compose-load-balancing.md)

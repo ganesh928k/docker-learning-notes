@@ -64,7 +64,7 @@ sudo ls -lh /var/lib/docker/network/files/
 sudo ls -lh /var/lib/docker/buildkit/
 ```
 
-> ⚠️ Never manually edit/delete files here — always use Docker CLI.
+> [!WARNING] Never manually edit/delete files here — always use Docker CLI.
 > Manual changes corrupt Docker's internal state.
 
 ---
@@ -129,7 +129,7 @@ firewall-cmd --permanent --add-port=2375/tcp
 firewall-cmd --reload
 ```
 
-> ⚠️ Port 2375 is **unauthenticated**. Use only on trusted internal networks.
+> [!WARNING] Port 2375 is **unauthenticated**. Use only on trusted internal networks.
 > For internet-facing access, use port **2376 with TLS**.
 
 ---
@@ -156,3 +156,8 @@ locate <filename>         # find files fast
 | `docker image inspect nginx \| grep -i lower` | Show OverlayFS layers |
 | `systemctl daemon-reload && systemctl restart docker` | Apply daemon config changes |
 | `tree -af /var/lib/docker/image/` | Visualise layer structure |
+
+
+---
+
+*Navigation:*<br>[&larr; Previous Note](10-login-push-local-registry.md) | [Next Note &rarr;](12-resource-constraints-cgroups.md)

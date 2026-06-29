@@ -70,3 +70,8 @@ CMD ["/myapp"]
 1. **Tiny Images**: The final image size for the Go app above will be ~2MB instead of ~800MB (the size of the `golang` image).
 2. **More Secure**: Without shells, package managers, or compilers in the final image, attackers have a much harder time exploiting the container.
 3. **Cleaner Dockerfiles**: You don't need complex `RUN apt-get remove && apt-get clean` chaining tricks to shrink your images.
+
+
+---
+
+*Navigation:*<br>[&larr; Previous Note](17-practical-app-deployments.md) | [Next Note &rarr;](19-docker-compose.md)

@@ -97,3 +97,8 @@ CMD ["-c", "3", "8.8.8.8"]
 ```
 If you run `docker run myimage`, it pings `8.8.8.8` three times.
 If you run `docker run myimage google.com`, it pings `google.com`!
+
+
+---
+
+*Navigation:*<br>[&larr; Previous Note](15-namespaces-pid-uts-ipc-user.md) | [Next Note &rarr;](17-practical-app-deployments.md)

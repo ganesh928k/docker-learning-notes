@@ -55,4 +55,9 @@ docker push ganesh928k/mysite:v1
 | Verified Publisher | `bitnami/nginx` | ✅ Verified company |
 | Community | `username/imagename` | ⚠️ Review before using |
 
-> **Tip:** For production, always prefer Official or Verified Publisher images.
+> [!TIP] For production, always prefer Official or Verified Publisher images.
+
+
+---
+
+*Navigation:*<br>[&larr; Previous Note](06-dockerfile.md) | [Next Note &rarr;](08-cleanup.md)

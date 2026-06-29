@@ -24,7 +24,7 @@ docker start con1
 docker start -dit con1    # start with interactive terminal
 ```
 
-> ⚠️ Flags must come BEFORE the container name: `docker start -dit con1` ✅
+> [!WARNING] Flags must come BEFORE the container name: `docker start -dit con1` ✅
 
 ---
 
@@ -76,3 +76,8 @@ docker stats con1      # specific container
 ```
 
 Press `Ctrl+C` to exit. Shows CPU %, memory, network I/O, disk I/O.
+
+
+---
+
+*Navigation:*<br>[&larr; Previous Note](03-containers.md) | [Next Note &rarr;](05-networking.md)

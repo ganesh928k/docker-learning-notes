@@ -12,7 +12,7 @@ cd myproject
 vim Dockerfile       # capital D — this is the convention!
 ```
 
-> ⚠️ Name it `Dockerfile` (capital D), not `dockerfile`.
+> [!WARNING] Name it `Dockerfile` (capital D), not `dockerfile`.
 > Docker looks for this exact name by default.
 
 ---
@@ -89,3 +89,8 @@ docker image build -t mysite:v1 .
 docker run -d --name mysite -p 8080:80 mysite:v1
 # Open http://localhost:8080 in your browser
 ```
+
+
+---
+
+*Navigation:*<br>[&larr; Previous Note](05-networking.md) | [Next Note &rarr;](07-dockerhub.md)

@@ -108,3 +108,8 @@ EXPOSE 80
 docker build -t my-nginx-server .
 docker run -d -p 8080:80 --name my_nginx_app my-nginx-server:latest
 ```
+
+
+---
+
+*Navigation:*<br>[&larr; Previous Note](16-dockerfile-advanced-instructions.md) | [Next Note &rarr;](18-multistage-builds.md)
