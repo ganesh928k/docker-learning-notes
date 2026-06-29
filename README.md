@@ -28,6 +28,8 @@
 | 17 | [Practical App Deployments](notes/17-practical-app-deployments.md) | Dockerfiles for Node.js, Python, Nginx, Jenkins |
 | 18 | [Multi-Stage Builds](notes/18-multistage-builds.md) | Stage separation, tiny images, Go example |
 | 19 | [Docker Compose](notes/19-docker-compose.md) | docker-compose.yml, up, down, scaling, WordPress app |
+| 20 | [Docker Compose Load Balancing](notes/20-docker-compose-load-balancing.md) | --scale flag, Nginx reverse proxy, live reload |
+| 21 | [Linux Essentials for Docker](notes/21-linux-essentials-for-docker.md) | Chrony time sync, dnf updates, enterprise bash history |
 | ⚡ | [Quick Cheat Sheet](cheatsheet.md) | All essential commands at a glance |
 
 ---
@@ -47,6 +49,7 @@
 Basics (01-08)          → Core Docker CLI, images, containers, cleanup
 Intermediate (09-11)    → commit, tag, push, local registry, internals
 Advanced (12-19)        → cgroups, networking, namespaces, advanced Dockerfiles, Docker Compose
+Ecosystem (20-21)       → Compose Load Balancing, Linux Essentials (Chrony, Bash History)
 ```
 
 ---
@@ -84,7 +87,9 @@ docker-learning-notes/
 │   ├── 16-dockerfile-advanced-instructions.md
 │   ├── 17-practical-app-deployments.md
 │   ├── 18-multistage-builds.md
-│   └── 19-docker-compose.md
+│   ├── 19-docker-compose.md
+│   ├── 20-docker-compose-load-balancing.md
+│   └── 21-linux-essentials-for-docker.md
 ├── examples/
 │   ├── docker-compose-nginx/
 │   ├── docker-compose-python/

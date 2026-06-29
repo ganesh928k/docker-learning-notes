@@ -258,6 +258,8 @@ docker compose logs -f                # Follow logs for all services
 docker compose exec db bash           # Shell into a specific service
 docker compose config                 # Validate compose file
 docker compose up -d --scale web=3    # Scale a service to 3 instances
+docker compose up --build -d          # Build images before starting containers
+docker exec nginx-lb nginx -s reload  # Reload Nginx config without restart
 ```
 
 ---
@@ -271,6 +273,22 @@ docker volume prune
 docker system prune
 docker system prune -a
 docker rm -f $(docker ps -a -q)
+```
+
+---
+
+## 🐧 Linux Essentials (Host)
+
+```bash
+# Time Synchronization (Chrony)
+timedatectl set-ntp true              # Enable NTP
+systemctl restart chronyd             # Restart chrony
+chronyc -a makestep                   # Force time step
+chronyc sources -v                    # Verify sync
+
+# Updates
+dnf update 'docker*' -y               # Update docker packages
+dnf upgrade --security -y             # Apply security patches
 ```
 
 ---
