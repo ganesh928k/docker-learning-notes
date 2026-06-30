@@ -37,6 +37,9 @@ Most tutorials are either too high-level or overly theoretical. These notes were
 | 19 | [Docker Compose](notes/19-docker-compose.md) | docker-compose.yml, up, down, scaling, WordPress app |
 | 20 | [Docker Compose Load Balancing](notes/20-docker-compose-load-balancing.md) | --scale flag, Nginx reverse proxy, live reload |
 | 21 | [Linux Essentials for Docker](notes/21-linux-essentials-for-docker.md) | Chrony time sync, dnf updates, enterprise bash history |
+| 22 | [Docker Swarm — Setup & Cluster Init](notes/22-docker-swarm-setup.md) | swarm init, join tokens, node ls, firewall ports |
+| 23 | [Docker Swarm — Services](notes/23-docker-swarm-services.md) | service create, scale, update, rollback, routing mesh |
+| 24 | [Docker Swarm — Auto Scaling](notes/24-docker-swarm-auto-scaling.md) | CPU-based auto-scaling script, docker stats, load simulation |
 | ⚡ | [Quick Cheat Sheet](cheatsheet.md) | All essential commands at a glance |
 
 ---
@@ -44,7 +47,7 @@ Most tutorials are either too high-level or overly theoretical. These notes were
 ## 🚀 How to Use
 
 1. ⭐ **Star** this repo so you can find it later
-2. Read notes **in order (01 → 19)** for a structured learning path
+2. Read notes **in order (01 → 24)** for a structured learning path
 3. Keep the **[Cheat Sheet](cheatsheet.md)** open while practising
 4. Every command was tested on **AlmaLinux 9 / RHEL 9**
 
@@ -57,6 +60,7 @@ Basics (01-08)          → Core Docker CLI, images, containers, cleanup
 Intermediate (09-11)    → commit, tag, push, local registry, internals
 Advanced (12-19)        → cgroups, networking, namespaces, advanced Dockerfiles, Docker Compose
 Ecosystem (20-21)       → Compose Load Balancing, Linux Essentials (Chrony, Bash History)
+Orchestration (22-24)   → Docker Swarm: cluster setup, services, rolling updates, auto-scaling
 ```
 
 ---
@@ -96,7 +100,10 @@ docker-learning-notes/
 │   ├── 18-multistage-builds.md
 │   ├── 19-docker-compose.md
 │   ├── 20-docker-compose-load-balancing.md
-│   └── 21-linux-essentials-for-docker.md
+│   ├── 21-linux-essentials-for-docker.md
+│   ├── 22-docker-swarm-setup.md
+│   ├── 23-docker-swarm-services.md
+│   └── 24-docker-swarm-auto-scaling.md
 ├── examples/
 │   ├── docker-compose-nginx/
 │   ├── docker-compose-python/

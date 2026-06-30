@@ -264,6 +264,63 @@ docker exec nginx-lb nginx -s reload  # Reload Nginx config without restart
 
 ---
 
+## 🐝 Docker Swarm
+
+```bash
+# Cluster Setup
+docker swarm init --advertise-addr 192.168.10.129   # Init swarm on manager
+docker swarm join --token <TOKEN> <manager-ip>:2377 # Join as worker
+docker swarm join-token worker                       # (Re)print worker join token
+docker swarm join-token manager                      # (Re)print manager join token
+docker swarm leave                                   # Worker leaves swarm
+docker swarm leave --force                           # Manager leaves (destroys cluster)
+
+# Node Management
+docker node ls                                       # List all nodes in cluster
+docker node inspect self                             # Inspect current node
+docker node inspect swarm-worker                     # Inspect a specific node
+docker node inspect --pretty swarm-manager           # Human-friendly output
+
+# Services
+docker service create --name mynginx --replicas 3 -p 8080:80 nginx
+docker service ls                                    # List all services
+docker service ps mynginx                            # List tasks (containers) per node
+docker service inspect mynginx                       # Full service details (JSON)
+docker service inspect --pretty mynginx              # Human-readable details
+docker service logs -f mynginx                       # Follow logs from all replicas
+docker service logs --tail 50 mynginx               # Last 50 log lines
+
+# Scaling
+docker service scale mynginx=5                       # Scale to 5 replicas
+docker service scale mynginx=2                       # Scale down to 2 replicas
+
+# Rolling Updates & Rollback
+docker service update --image nginx:latest mynginx   # Rolling update image
+docker service update \
+  --image nginx:1.27 \
+  --update-parallelism 1 \
+  --update-delay 10s mynginx                         # Controlled rolling update
+docker service rollback mynginx                      # Rollback to previous spec
+
+# Removing Services
+docker service rm mynginx                            # Remove a service (all tasks)
+docker service rm svc1 svc2                          # Remove multiple services
+
+# Firewall (run on manager before swarm init)
+firewall-cmd --permanent --add-port=2377/tcp --zone=public
+firewall-cmd --permanent --add-port=7946/tcp --zone=public
+firewall-cmd --permanent --add-port=7946/udp --zone=public
+firewall-cmd --permanent --add-port=4789/udp --zone=public
+firewall-cmd --reload
+
+# Auto Scaling (manual script approach)
+docker stats --no-stream --format "{{.CPUPerc}}"     # Snapshot CPU% of all containers
+docker service inspect \
+  --format '{{.Spec.Mode.Replicated.Replicas}}' mynginx  # Get current replica count
+```
+
+---
+
 ## 🗑️ Cleanup
 
 ```bash
@@ -313,3 +370,8 @@ dnf upgrade --security -y             # Apply security patches
 | `docker compose build` | `docker compose up --build` (build and start) |
 | `docker imageges` | `docker images` (typo) |
 | `docker-compose up` | `docker compose up` (v2 plugin syntax) |
+| `swarm init` without `--advertise-addr` | Always specify `--advertise-addr <ip>` on multi-IP hosts |
+| `docker node ls` on a worker | Only managers can run `docker node ls` |
+| `docker service create --name ngnix ...` | `nginx` — typo causes image pull failure |
+| `docker service ps` (no name) | `docker service ps <service-name>` |
+| Removing container directly on worker | Use `docker service rm` — Swarm will just restart it |

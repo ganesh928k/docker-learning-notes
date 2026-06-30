@@ -76,4 +76,4 @@ source /etc/profile
 
 ---
 
-*Navigation:*<br>[&larr; Previous Note](20-docker-compose-load-balancing.md)
+*Navigation:*<br>[&larr; Previous Note](20-docker-compose-load-balancing.md) | [Next Note &rarr;](22-docker-swarm-setup.md)
