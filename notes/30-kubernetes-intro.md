@@ -304,4 +304,4 @@ kubectl delete -f manifest.yaml
 
 ---
 
-*← [29 — Docker Secrets](29-docker-secrets.md) | [31 — Conclusion →](31-conclusion.md)*
+*Navigation:*<br>[&larr; Previous Note](29-docker-secrets.md) | [Next Note &rarr;](31-conclusion.md)

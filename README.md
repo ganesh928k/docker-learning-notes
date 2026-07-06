@@ -46,6 +46,9 @@ Most tutorials are either too high-level or overly theoretical. These notes were
 | 28 | [Docker Compose Advanced](notes/28-docker-compose-advanced.md) | top, events, export, wait, watch, health checks, sticky sessions |
 | 29 | [Docker Secrets](notes/29-docker-secrets.md) | Swarm secrets, .env, BuildKit secrets, HashiCorp Vault intro |
 | 30 | [Kubernetes Introduction](notes/30-kubernetes-intro.md) | Minikube, kubectl, pods, deployments, services, Docker→K8s mapping |
+| 32 | [Troubleshooting](notes/32-troubleshooting.md) | Common errors: daemon not running, out of space, port conflicts |
+| 33 | [Docker Best Practices](notes/33-docker-best-practices.md) | Security, build cache, lifecycle, prod readiness |
+| 34 | [docker buildx & Multi-Platform](notes/34-docker-buildx-multi-platform.md) | Multi-arch builds, BuildKit secrets |
 | 🏁 | [Conclusion](notes/31-conclusion.md) | Complete journey recap, skills checklist, what's next |
 | ⚡ | [Quick Cheat Sheet](cheatsheet.md) | All essential commands at a glance |
 
@@ -70,6 +73,7 @@ Ecosystem    (20-21)  → Compose Load Balancing, Linux Essentials (Chrony, Bash
 Orchestration(22-24)  → Docker Swarm: cluster setup, services, rolling updates, auto-scaling
 Security     (25-29)  → Attack surface, Shellshock, Trivy, seccomp, capabilities, secrets
 Beyond Docker(30-31)  → Kubernetes intro (Minikube), full conclusion & what's next
+Bonus        (32-34)  → Troubleshooting, Docker Best Practices, Multi-platform builds (buildx)
 ```
 
 ---

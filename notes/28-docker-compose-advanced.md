@@ -343,4 +343,4 @@ docker compose watch         # Auto-rebuild on change
 
 ---
 
-*← [27 — Container Privilege Escalation](27-container-privilege-escalation.md) | [29 — Docker Secrets →](29-docker-secrets.md)*
+*Navigation:*<br>[&larr; Previous Note](27-container-privilege-escalation.md) | [Next Note &rarr;](29-docker-secrets.md)

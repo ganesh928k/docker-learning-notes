@@ -74,4 +74,15 @@ CMD ["/myapp"]
 
 ---
 
+## ⚡ Quick Reference
+
+| Syntax / Concept | Purpose |
+|---|---|
+| `FROM image AS builder` | Name the first stage `builder` |
+| `FROM scratch` | Special zero-byte empty image for production |
+| `COPY --from=builder /src /dest` | Copy artifacts from a previous build stage |
+| **Benefit** | Tiny, secure final images without build tools |
+
+---
+
 *Navigation:*<br>[&larr; Previous Note](17-practical-app-deployments.md) | [Next Note &rarr;](19-docker-compose.md)

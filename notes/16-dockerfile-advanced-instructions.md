@@ -101,4 +101,115 @@ If you run `docker run myimage google.com`, it pings `google.com`!
 
 ---
 
+## 6. ARG — Build-Time Variables
+
+`ARG` defines a variable that is **only available during the build process** — it does NOT persist into the final image or running container. This makes it ideal for build-time configuration without leaking secrets into the image.
+
+> [!IMPORTANT]
+> **`ARG` vs `ENV`:**
+> - `ARG` = build-time only (gone after build, invisible in `docker inspect`)
+> - `ENV` = persists into the image and is visible at runtime and in `docker inspect`
+
+**Example:**
+```dockerfile
+FROM node:18-alpine
+
+# Build-time variable with a default value
+ARG NODE_ENV=production
+
+# Build-time variable without a default (must be supplied at build)
+ARG BUILD_VERSION
+
+# Promote ARG to ENV if you need it at runtime too
+ENV NODE_ENV=${NODE_ENV}
+
+WORKDIR /app
+COPY package*.json ./
+RUN echo "Building version: ${BUILD_VERSION}" && npm ci
+COPY . .
+CMD ["node", "app.js"]
+```
+
+```bash
+# Pass ARG values at build time with --build-arg
+docker build \
+  --build-arg NODE_ENV=development \
+  --build-arg BUILD_VERSION=1.2.3 \
+  -t myapp:dev .
+
+# ARG is NOT visible in the final image
+docker inspect myapp:dev | grep BUILD_VERSION   # empty — it's gone
+```
+
+> [!CAUTION]
+> Never use `ARG` to pass secrets (passwords, tokens) — they appear in `docker history` and the build cache. Use Docker secrets or BuildKit's `--mount=type=secret` for that.
+
+---
+
+## 7. HEALTHCHECK — Container Health Monitoring
+
+`HEALTHCHECK` tells Docker how to test if a container is actually healthy — not just running. Docker uses this to report `healthy` / `unhealthy` status and to implement `depends_on: condition: service_healthy` in Compose.
+
+```dockerfile
+FROM nginx:alpine
+
+COPY ./html /usr/share/nginx/html
+
+# HEALTHCHECK syntax:
+# HEALTHCHECK [OPTIONS] CMD <command>
+HEALTHCHECK --interval=30s --timeout=5s --start-period=10s --retries=3 \
+  CMD curl -f http://localhost/ || exit 1
+
+EXPOSE 80
+CMD ["nginx", "-g", "daemon off;"]
+```
+
+| Option | Default | Meaning |
+|---|---|---|
+| `--interval` | `30s` | How often to run the check |
+| `--timeout` | `30s` | Max time a check can take |
+| `--start-period` | `0s` | Grace period before failures count |
+| `--retries` | `3` | Failures before marking unhealthy |
+
+```bash
+# Build and run
+docker build -t healthy-nginx .
+docker run -d --name web healthy-nginx
+
+# Check health status
+docker ps                           # shows STATUS column: (healthy)
+docker inspect web | grep -A 8 '"Health"'
+```
+
+Health states:
+```
+starting   → within start-period, failures not counted yet
+healthy    → check passing
+unhealthy  → retries exhausted, check still failing
+```
+
+> [!TIP]
+> Always add `HEALTHCHECK` to images deployed in Swarm or Compose with `depends_on: condition: service_healthy`. Without it, Docker considers the container healthy as soon as the process starts — even if the app is still initializing.
+
+---
+
+## Dockerfile Instruction Summary
+
+| Instruction | Build-time | Runtime | Purpose |
+|---|---|---|---|
+| `FROM` | ✅ | — | Base image |
+| `COPY` | ✅ | — | Copy files from host |
+| `ADD` | ✅ | — | Copy + download URLs + extract tars |
+| `RUN` | ✅ | — | Execute shell command |
+| `EXPOSE` | ✅ | ℹ️ | Document port (informational) |
+| `WORKDIR` | ✅ | ✅ | Set working directory |
+| `ENV` | ✅ | ✅ | Environment variable (persists in image) |
+| `ARG` | ✅ | ❌ | Build-time variable (gone after build) |
+| `LABEL` | ✅ | ✅ | Metadata (author, version, etc.) |
+| `CMD` | — | ✅ | Default command (overrideable) |
+| `ENTRYPOINT` | — | ✅ | Core executable (args appended) |
+| `HEALTHCHECK` | ✅ | ✅ | Health monitoring command |
+
+---
+
 *Navigation:*<br>[&larr; Previous Note](15-namespaces-pid-uts-ipc-user.md) | [Next Note &rarr;](17-practical-app-deployments.md)

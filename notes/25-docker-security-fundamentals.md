@@ -314,4 +314,4 @@ docker exec mycontainer ps aux
 
 ---
 
-*← [24 — Docker Swarm Auto Scaling](24-docker-swarm-auto-scaling.md) | [26 — Security Profiles →](26-security-profiles-seccomp-capabilities-dct.md)*
+*Navigation:*<br>[&larr; Previous Note](24-docker-swarm-auto-scaling.md) | [Next Note &rarr;](26-security-profiles-seccomp-capabilities-dct.md)

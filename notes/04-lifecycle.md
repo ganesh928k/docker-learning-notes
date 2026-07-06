@@ -1,5 +1,7 @@
 # 04 — Container Lifecycle Management
 
+> **Session 1** | Tested on: AlmaLinux 9 | Author: Ganesh
+
 ```
 create → start → (pause / unpause) → stop → rm
 ```
@@ -77,6 +79,56 @@ docker stats con1      # specific container
 
 Press `Ctrl+C` to exit. Shows CPU %, memory, network I/O, disk I/O.
 
+
+---
+
+## Restart Policies
+
+Restart policies control what Docker does when a container exits. Essential for production.
+
+```bash
+# Set at run time
+docker run -d --restart always --name web nginx
+docker run -d --restart on-failure:3 --name worker myapp
+docker run -d --restart unless-stopped --name db mysql:8.0
+
+# Update restart policy on existing container (no restart needed)
+docker update --restart always web
+docker update --restart no web   # disable
+```
+
+| Policy | Behaviour |
+|---|---|
+| `no` | Never restart (default) |
+| `on-failure[:max]` | Restart only on non-zero exit code |
+| `always` | Always restart — even after `docker daemon` reboot |
+| `unless-stopped` | Like `always`, but respects manual `docker stop` |
+
+> [!TIP]
+> Use `unless-stopped` for services you always want running.
+> Use `on-failure:3` for batch jobs that should retry but not loop forever.
+
+---
+
+## ⚡ Quick Reference
+
+| Command | What it does |
+|---|---|
+| `docker stop con1` | Graceful stop (SIGTERM → SIGKILL) |
+| `docker kill con1` | Immediate kill (SIGKILL) |
+| `docker start con1` | Start stopped container |
+| `docker restart con1` | Stop + start |
+| `docker pause con1` | Freeze (cgroups) |
+| `docker unpause con1` | Resume |
+| `docker rm con1` | Remove stopped container |
+| `docker rm -f con1` | Force remove running container |
+| `docker rename con1 web` | Rename container |
+| `docker logs con1 --follow` | Stream live logs |
+| `docker logs con1 --tail 50` | Last 50 log lines |
+| `docker stats` | Live CPU/memory/IO usage |
+| `--restart always` | Auto-restart on exit/reboot |
+| `--restart on-failure:3` | Retry up to 3 times on failure |
+| `--restart unless-stopped` | Always restart unless manually stopped |
 
 ---
 

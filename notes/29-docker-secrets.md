@@ -279,4 +279,4 @@ docker inspect mycontainer | grep -iA5 "Env"
 
 ---
 
-*← [28 — Docker Compose Advanced](28-docker-compose-advanced.md) | [30 — Kubernetes Introduction →](30-kubernetes-intro.md)*
+*Navigation:*<br>[&larr; Previous Note](28-docker-compose-advanced.md) | [Next Note &rarr;](30-kubernetes-intro.md)

@@ -181,6 +181,8 @@ docker info | grep -i userns
 docker start/stop/restart/kill web
 docker pause web / docker unpause web
 docker rename web mysite
+docker run -d --restart always nginx # Auto-restart policy
+docker update --restart unless-stopped web # Update live
 ```
 
 ---
@@ -202,6 +204,8 @@ docker cp ./file web:/path
 docker build -t myapp .
 docker build -t myapp:v2 .
 docker inspect myapp:latest
+# Add .dockerignore file to exclude .git, node_modules, .env from build context
+
 ```
 
 ---
@@ -212,10 +216,24 @@ docker inspect myapp:latest
 |---|---|
 | `WORKDIR` | Sets working directory (e.g., `WORKDIR /app`) |
 | `ENV` | Sets environment variables (`ENV VAR=value`) |
+| `ARG` | Build-time variables (vanished after build) |
 | `LABEL` | Adds metadata (`LABEL version="1.0"`) |
 | `ADD` | Like `COPY`, but extracts tars & downloads URLs |
 | `ENTRYPOINT` | Core executable (appends `docker run` args) |
 | `CMD` | Default arguments (overridden by `docker run` args) |
+| `HEALTHCHECK` | Container health monitoring |
+
+---
+
+## ⚡ Buildx & Multi-Platform
+
+```bash
+docker buildx create --use                  # Setup new builder
+docker buildx inspect                       # Check supported platforms
+docker buildx build --platform linux/amd64,linux/arm64 --push .
+# Use BuildKit secrets securely (no history trace)
+# RUN --mount=type=secret,id=token cat /run/secrets/token
+```
 
 ---
 

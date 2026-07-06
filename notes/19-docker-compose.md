@@ -46,9 +46,11 @@ graph LR
     DB --- V1
 ```
 
-```yaml
-version: '3.8'
+> [!NOTE]
+> The `version:` key (e.g., `version: '3.8'`) is **deprecated** in Docker Compose v2 and is silently ignored.
+> Modern Compose files do not need it. It is removed from all examples below.
 
+```yaml
 services:
   db:
     image: mysql:5.7
@@ -134,7 +136,8 @@ docker compose up -d --scale wordpress=1
 
 1. **Automatic Networking**: By default, `docker compose up` creates a custom bridge network for the project. Services can communicate with each other using their service names as hostnames (e.g., `WORDPRESS_DB_HOST: db`).
 2. **Project Names**: Docker Compose uses the directory name as the project name. If your folder is named `myapp`, the network will be `myapp_default` and the containers will be named `myapp-db-1`, `myapp-wordpress-1`.
-3. **Rebuilding Images**: If you change your code or your `Dockerfile`, running `docker compose up` will **not** rebuild the image automatically. You must run `docker compose build` or `docker compose up --build`.
+3. **Rebuilding Images**: If you change your code or your `Dockerfile`, running `docker compose up` will **not** rebuild the image automatically. You must run `docker compose up --build`.
+4. **No version key needed**: Docker Compose v2 (the `docker compose` plugin) does not require or use the `version:` field. Remove it from all new files.
 
 
 ---

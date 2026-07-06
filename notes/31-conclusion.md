@@ -25,10 +25,11 @@ No copy-paste from tutorials. No theory without practice. Every command in these
 | **7** | Jul 4, 2026 | Docker Security, CVE Scanning, Shellshock | 25 |
 | **8** | Jul 4–6, 2026 | seccomp, Capabilities, Escalation, Secrets | 26 → 29 |
 | **9** | Jul 6, 2026 | Kubernetes Introduction (Minikube) | 30 |
+| **10** | Jul 6, 2026 | Troubleshooting, Best Practices, Buildx (Bonus) | 32 → 34 |
 
 **Total Duration:** ~70 days  
-**Total Notes:** 31 structured files  
-**Total Lines:** 5,000+
+**Total Notes:** 34 structured files  
+**Total Lines:** 5,500+
 
 ---
 
@@ -58,6 +59,9 @@ No copy-paste from tutorials. No theory without practice. Every command in these
 ├─────────────────┼───────────────────────────────────────────┤
 │  BEYOND  (30)   │ Kubernetes: Minikube, pods, deployments,  │
 │                 │ services, kubectl CLI                      │
+├─────────────────┼───────────────────────────────────────────┤
+│  BONUS  (32-34) │ Troubleshooting, Production Best Practices,│
+│                 │ Multi-platform builds (buildx) & Secrets   │
 └─────────────────┴───────────────────────────────────────────┘
 ```
 
@@ -120,6 +124,12 @@ No copy-paste from tutorials. No theory without practice. Every command in these
 - [x] YAML manifests
 - [x] Docker → Kubernetes concept mapping
 
+### Advanced Polish (Bonus)
+- [x] Missing fundamental topics: `.dockerignore`, `HEALTHCHECK`, `ARG`
+- [x] Troubleshooting common daemon, space, and crash errors
+- [x] Security and container lifecycle best practices
+- [x] Multi-platform builds with `docker buildx` and BuildKit secrets
+
 ---
 
 ## 📚 The Cheat Sheet
@@ -158,8 +168,8 @@ The best learning is learning that sticks — and it sticks when you build it fr
 
 | Metric | Value |
 |---|---|
-| **Total notes** | 31 |
-| **Total git commits** | 14 (core) |
+| **Total notes** | 34 |
+| **Total git commits** | 15 (core) |
 | **Total example projects** | 4 |
 | **Learning span** | ~70 days (Apr 26 → Jul 6, 2026) |
 | **Platform** | AlmaLinux 9 / RHEL 9 |
@@ -192,4 +202,4 @@ cat cheatsheet.md
 
 ---
 
-*← [30 — Kubernetes Introduction](30-kubernetes-intro.md)*
+*Navigation:*<br>[&larr; Previous Note](30-kubernetes-intro.md) | [Next Note &rarr;](32-troubleshooting.md)

@@ -1,5 +1,7 @@
 # 05 — Port Mapping & Networking
 
+> **Session 1** | Tested on: AlmaLinux 9 | Author: Ganesh
+
 By default, container ports are only accessible **inside Docker's network**.
 Port mapping exposes them to your host (and beyond).
 
@@ -60,6 +62,20 @@ docker inspect con1 | grep IPAddress  # container's internal IP
 | `host` | Container shares host's network stack |
 | `none` | No networking |
 
+
+---
+
+## ⚡ Quick Reference
+
+| Command | What it does |
+|---|---|
+| `-p 8080:80` | Map host port 8080 → container port 80 |
+| `-p 80:80 -p 443:443` | Map multiple ports |
+| `-P` | Auto-map all EXPOSED ports to random host ports |
+| `ip a` | Show host network interfaces (incl. docker0 bridge) |
+| `docker network ls` | List all Docker networks |
+| `docker network inspect bridge` | Details + container IPs |
+| `docker inspect con1 \| grep IPAddress` | Container's internal IP |
 
 ---
 

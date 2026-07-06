@@ -76,4 +76,17 @@ source /etc/profile
 
 ---
 
+## ⚡ Quick Reference
+
+| Command | What it does |
+|---|---|
+| `timedatectl set-ntp true` | Enable Network Time Protocol |
+| `chronyc -a makestep` | Force immediate time sync |
+| `dnf update 'docker*'` | Update Docker packages securely |
+| `dnf upgrade --security` | Apply security patches only |
+| `export HISTTIMEFORMAT="%F %T "` | Add timestamps to bash history |
+| `shopt -s histappend` | Append (don't overwrite) bash history |
+
+---
+
 *Navigation:*<br>[&larr; Previous Note](20-docker-compose-load-balancing.md) | [Next Note &rarr;](22-docker-swarm-setup.md)

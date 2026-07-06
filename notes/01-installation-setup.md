@@ -1,5 +1,7 @@
 # 01 — Installation & Setup (AlmaLinux 9 / RHEL 9)
 
+> **Session 1** | Tested on: AlmaLinux 9 | Author: Ganesh
+
 ## Step 1 — Remove old Docker packages
 
 ```bash
@@ -69,6 +71,23 @@ newgrp docker          # apply without logging out
 docker run hello-world # should work without sudo now
 ```
 
+
+---
+
+## ⚡ Quick Reference
+
+| Command | What it does |
+|---|---|
+| `dnf remove docker docker-*` | Remove old Docker packages |
+| `dnf config-manager --add-repo <url>` | Add Docker CE repo |
+| `dnf install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin` | Install Docker CE |
+| `systemctl enable --now docker` | Enable and start Docker daemon |
+| `docker run hello-world` | Verify installation works |
+| `docker --version` | Short version string |
+| `docker version` | Full client + server details |
+| `docker info` | Full daemon configuration |
+| `usermod -aG docker $USER` | Run Docker without sudo |
+| `newgrp docker` | Apply group change without logout |
 
 ---
 

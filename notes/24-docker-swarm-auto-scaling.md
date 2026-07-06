@@ -190,4 +190,4 @@ A simple shell script ties them together. This is exactly how many real-world li
 
 ---
 
-*Navigation:*<br>[&larr; Previous Note](23-docker-swarm-services.md)
+*Navigation:*<br>[&larr; Previous Note](23-docker-swarm-services.md) | [Next Note &rarr;](25-docker-security-fundamentals.md)

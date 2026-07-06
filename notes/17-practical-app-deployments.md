@@ -112,4 +112,15 @@ docker run -d -p 8080:80 --name my_nginx_app my-nginx-server:latest
 
 ---
 
+## ⚡ Quick Reference
+
+| App Type | Key Techniques Used |
+|---|---|
+| **Node.js** | Cache `package.json` first, then copy source code. |
+| **Python** | Copy `requirements.txt`, install dependencies, copy source. |
+| **Jenkins** | Use `ADD` to download remote `.war` file directly. |
+| **Nginx** | Serve static files by copying to `/usr/share/nginx/html/`. |
+
+---
+
 *Navigation:*<br>[&larr; Previous Note](16-dockerfile-advanced-instructions.md) | [Next Note &rarr;](18-multistage-builds.md)

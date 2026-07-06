@@ -398,4 +398,4 @@ docker inspect mycontainer | grep -A 10 SecurityOpt
 
 ---
 
-*← [25 — Docker Security Fundamentals](25-docker-security-fundamentals.md) | [27 — Container Privilege Escalation →](27-container-privilege-escalation.md)*
+*Navigation:*<br>[&larr; Previous Note](25-docker-security-fundamentals.md) | [Next Note &rarr;](27-container-privilege-escalation.md)

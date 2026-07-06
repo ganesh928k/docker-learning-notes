@@ -269,4 +269,4 @@ docker inspect mycontainer | grep -E "Privileged|CapAdd|CapDrop|SecurityOpt"
 
 ---
 
-*← [26 — Security Profiles](26-security-profiles-seccomp-capabilities-dct.md) | [28 — Docker Compose Advanced →](28-docker-compose-advanced.md)*
+*Navigation:*<br>[&larr; Previous Note](26-security-profiles-seccomp-capabilities-dct.md) | [Next Note &rarr;](28-docker-compose-advanced.md)

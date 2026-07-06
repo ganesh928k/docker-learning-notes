@@ -1,5 +1,7 @@
 # 08 — System Cleanup
 
+> **Session 1** | Tested on: AlmaLinux 9 | Author: Ganesh
+
 Regular cleanup prevents Docker from consuming all your disk space.
 
 ---
@@ -81,6 +83,24 @@ docker container prune
 docker image prune
 ```
 
+
+---
+
+## ⚡ Quick Reference
+
+| Command | What it does |
+|---|---|
+| `docker system df` | Check disk usage summary |
+| `docker system df -v` | Verbose per-object breakdown |
+| `docker container prune` | Remove all stopped containers |
+| `docker container rm -f $(docker ps -a -q)` | Force-remove ALL containers |
+| `docker image prune` | Remove dangling (untagged) images |
+| `docker image prune -a` | Remove all unused images |
+| `docker volume prune` | Remove all unused volumes |
+| `docker network prune` | Remove unused networks |
+| `docker system prune` | Remove stopped containers + dangling images + networks + build cache |
+| `docker system prune -a` | Same + all unused images |
+| `docker system prune -a -f` | ⚠️ Non-interactive nuclear option — never on production! |
 
 ---
 

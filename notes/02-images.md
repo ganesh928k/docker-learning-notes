@@ -1,5 +1,7 @@
 # 02 — Docker Images
 
+> **Session 1** | Tested on: AlmaLinux 9 | Author: Ganesh
+
 An **image** is a read-only template (blueprint) used to create containers.
 Images are made of layers and stored locally after being pulled.
 
@@ -63,6 +65,26 @@ docker rmi 331548c5249b      # by ID
 
 > You cannot remove an image while a container (even stopped) is using it. Remove the container first.
 
+
+---
+
+## ⚡ Quick Reference
+
+| Command | What it does |
+|---|---|
+| `docker pull nginx:latest` | Download image |
+| `docker pull nginx:1.27` | Pull specific version |
+| `docker images` | List local images |
+| `docker image ls` | Same as above |
+| `docker images nginx` | Filter by name |
+| `docker images "nginx*"` | Wildcard filter (always quote!) |
+| `docker search nginx` | Search Docker Hub |
+| `docker search --filter is-official=true nginx` | Official images only |
+| `docker image history nginx` | Show image layers |
+| `docker rmi nginx` | Remove image (by name or ID) |
+| `docker rmi $(docker images -q)` | Remove ALL images |
+| `docker image prune` | Remove dangling images |
+| `docker image prune -a` | Remove all unused images |
 
 ---
 
