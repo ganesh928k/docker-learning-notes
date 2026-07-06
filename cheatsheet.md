@@ -350,6 +350,74 @@ dnf upgrade --security -y             # Apply security patches
 
 ---
 
+## 🔐 Security
+
+```bash
+# Trivy — image scanning
+trivy image ubuntu:latest
+trivy image --severity HIGH,CRITICAL myapp:latest
+trivy image --exit-code 1 --severity CRITICAL myapp:latest  # Fail CI on CRITICAL
+
+# seccomp profiles
+docker run --security-opt seccomp=/path/to/profile.json myimage
+docker run --security-opt no-new-privileges myimage           # Prevent escalation
+
+# Linux capabilities
+docker run --cap-drop ALL myimage                             # Drop everything
+docker run --cap-drop ALL --cap-add NET_BIND_SERVICE myimage  # Minimal
+docker inspect mycontainer | grep -A 5 -E "CapAdd|CapDrop"
+
+# SELinux (RHEL/AlmaLinux)
+docker run -v /data:/data:Z myimage                           # Private label
+docker run -v /data:/data:z myimage                           # Shared label
+docker run --security-opt label:type:container_t myimage
+
+# Docker Content Trust (DCT)
+export DOCKER_CONTENT_TRUST=1
+docker trust key generate my_key
+docker trust inspect --pretty myimage
+
+# Hardened run command
+docker run -d \
+  --cap-drop ALL \
+  --cap-add NET_BIND_SERVICE \
+  --security-opt no-new-privileges \
+  --read-only \
+  --user nonroot \
+  myapp:latest
+```
+
+---
+
+## 🔑 Docker Secrets (Swarm)
+
+```bash
+echo "mypassword" | docker secret create db_password -
+docker secret ls
+docker secret rm db_password
+docker service create --secret db_password --name mydb mysql:8.0
+# Secret at: /run/secrets/db_password inside container
+```
+
+---
+
+## ☸️ Kubernetes (Minikube)
+
+```bash
+minikube start --driver=docker && minikube status
+alias kubectl="minikube kubectl --"
+kubectl get nodes / pods / svc / deployments / all
+kubectl create deployment nginx --image=nginx
+kubectl expose deployment nginx --type=NodePort --port=80
+kubectl scale deployment nginx --replicas=5
+kubectl logs -f <pod> && kubectl exec -it <pod> -- bash
+kubectl apply -f manifest.yaml && kubectl delete -f manifest.yaml
+minikube service nginx --url
+minikube stop && minikube delete
+```
+
+---
+
 ## ⚠️ Common Mistakes
 
 | ❌ Wrong | ✅ Correct |
@@ -375,3 +443,8 @@ dnf upgrade --security -y             # Apply security patches
 | `docker service create --name ngnix ...` | `nginx` — typo causes image pull failure |
 | `docker service ps` (no name) | `docker service ps <service-name>` |
 | Removing container directly on worker | Use `docker service rm` — Swarm will just restart it |
+| `ENV MYSQL_ROOT_PASSWORD=secret` in Dockerfile | Use Docker secrets or `_FILE` env pattern |
+| `docker run --privileged` in production | Use `--cap-drop ALL --cap-add <specific>` |
+| Mounting `-v /var/run/docker.sock:/var/run/docker.sock` | Never expose Docker socket to untrusted containers |
+| `docker pull` without DCT in production | `export DOCKER_CONTENT_TRUST=1` |
+| Not scanning images before deploy | `trivy image --exit-code 1 --severity CRITICAL myapp` |

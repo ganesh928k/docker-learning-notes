@@ -4,8 +4,8 @@
 [![Docker](https://img.shields.io/badge/Docker-Tested-2496ED?logo=docker&logoColor=white)](#)
 [![Linux](https://img.shields.io/badge/Linux-RHEL%209%20%2F%20AlmaLinux-FCC624?logo=linux&logoColor=black)](#)
 
-> Practical, hands-on Docker notes built from real terminal sessions.
-> Beginner-to-intermediate friendly. No fluff — just working commands and clear explanations.
+> Practical, hands-on Docker notes built from real terminal sessions on AlmaLinux 9.
+> Beginner-to-advanced: fundamentals → orchestration → security → Kubernetes. No fluff — just working commands and clear explanations.
 
 ## 🎯 Why this repo?
 Most tutorials are either too high-level or overly theoretical. These notes were built from the ground up, inside a real terminal, fixing real errors. It serves as both a reference and a step-by-step interactive course.
@@ -40,6 +40,13 @@ Most tutorials are either too high-level or overly theoretical. These notes were
 | 22 | [Docker Swarm — Setup & Cluster Init](notes/22-docker-swarm-setup.md) | swarm init, join tokens, node ls, firewall ports |
 | 23 | [Docker Swarm — Services](notes/23-docker-swarm-services.md) | service create, scale, update, rollback, routing mesh |
 | 24 | [Docker Swarm — Auto Scaling](notes/24-docker-swarm-auto-scaling.md) | CPU-based auto-scaling script, docker stats, load simulation |
+| 25 | [Docker Security Fundamentals](notes/25-docker-security-fundamentals.md) | Attack surface, Shellshock CVE-2014-6271 demo, Trivy image scanning |
+| 26 | [Security Profiles — seccomp, Capabilities, SELinux, DCT](notes/26-security-profiles-seccomp-capabilities-dct.md) | Custom seccomp profiles, cap-drop/add, SELinux labels, Docker Content Trust |
+| 27 | [Container Privilege Escalation](notes/27-container-privilege-escalation.md) | --privileged chroot escape, docker.sock attack, hardening checklist |
+| 28 | [Docker Compose Advanced](notes/28-docker-compose-advanced.md) | top, events, export, wait, watch, health checks, sticky sessions |
+| 29 | [Docker Secrets](notes/29-docker-secrets.md) | Swarm secrets, .env, BuildKit secrets, HashiCorp Vault intro |
+| 30 | [Kubernetes Introduction](notes/30-kubernetes-intro.md) | Minikube, kubectl, pods, deployments, services, Docker→K8s mapping |
+| 🏁 | [Conclusion](notes/31-conclusion.md) | Complete journey recap, skills checklist, what's next |
 | ⚡ | [Quick Cheat Sheet](cheatsheet.md) | All essential commands at a glance |
 
 ---
@@ -47,7 +54,7 @@ Most tutorials are either too high-level or overly theoretical. These notes were
 ## 🚀 How to Use
 
 1. ⭐ **Star** this repo so you can find it later
-2. Read notes **in order (01 → 24)** for a structured learning path
+2. Read notes **in order (01 → 31)** for a structured learning path
 3. Keep the **[Cheat Sheet](cheatsheet.md)** open while practising
 4. Every command was tested on **AlmaLinux 9 / RHEL 9**
 
@@ -56,11 +63,13 @@ Most tutorials are either too high-level or overly theoretical. These notes were
 ## 🗺️ Learning Path
 
 ```
-Basics (01-08)          → Core Docker CLI, images, containers, cleanup
-Intermediate (09-11)    → commit, tag, push, local registry, internals
-Advanced (12-19)        → cgroups, networking, namespaces, advanced Dockerfiles, Docker Compose
-Ecosystem (20-21)       → Compose Load Balancing, Linux Essentials (Chrony, Bash History)
-Orchestration (22-24)   → Docker Swarm: cluster setup, services, rolling updates, auto-scaling
+Basics       (01-08)  → Core Docker CLI, images, containers, cleanup
+Intermediate (09-11)  → commit, tag, push, local registry, internals
+Advanced     (12-19)  → cgroups, networking, namespaces, advanced Dockerfiles, Docker Compose
+Ecosystem    (20-21)  → Compose Load Balancing, Linux Essentials (Chrony, Bash History)
+Orchestration(22-24)  → Docker Swarm: cluster setup, services, rolling updates, auto-scaling
+Security     (25-29)  → Attack surface, Shellshock, Trivy, seccomp, capabilities, secrets
+Beyond Docker(30-31)  → Kubernetes intro (Minikube), full conclusion & what's next
 ```
 
 ---
@@ -103,7 +112,14 @@ docker-learning-notes/
 │   ├── 21-linux-essentials-for-docker.md
 │   ├── 22-docker-swarm-setup.md
 │   ├── 23-docker-swarm-services.md
-│   └── 24-docker-swarm-auto-scaling.md
+│   ├── 24-docker-swarm-auto-scaling.md
+│   ├── 25-docker-security-fundamentals.md
+│   ├── 26-security-profiles-seccomp-capabilities-dct.md
+│   ├── 27-container-privilege-escalation.md
+│   ├── 28-docker-compose-advanced.md
+│   ├── 29-docker-secrets.md
+│   ├── 30-kubernetes-intro.md
+│   └── 31-conclusion.md
 ├── examples/
 │   ├── docker-compose-nginx/
 │   ├── docker-compose-python/
@@ -128,4 +144,4 @@ Found a mistake or want to add a topic?
 
 ---
 
-*Built with ❤️ while learning DevOps the hands-on way.*
+*Built with ❤️ while learning DevOps the hands-on way — from `docker run nginx` to Kubernetes, security, and beyond.*
